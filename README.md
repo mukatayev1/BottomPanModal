@@ -1,3 +1,3 @@
 # BottomPanModal
 
-A description of this package.
+Pre-release
