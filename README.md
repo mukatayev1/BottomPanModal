@@ -1,3 +1,3 @@
-# BottomPanModal
+# BottomPanModal Package
 
-Pre-release
+Pre-release. 
