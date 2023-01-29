@@ -87,4 +87,3 @@ public class ProfileViewController: UIViewController {
         roleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0).isActive = true
     }
 }
-

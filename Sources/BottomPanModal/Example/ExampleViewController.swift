@@ -72,7 +72,6 @@ private extension ExampleViewController {
         case stacked
         case navController
 
-
         var presentable: RowPresentable {
             switch self {
             case .basic: return Basic()

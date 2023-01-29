@@ -30,7 +30,7 @@ extension BottomPanModalPresentable where Self: UIViewController {
         guard let rootVC = rootViewController
             else { return 0}
 
-        if #available(iOS 11.0, *) { return rootVC.view.safeAreaInsets.top } else { return rootVC.topLayoutGuide.length }
+        return rootVC.view.safeAreaInsets.top
     }
 
     /**
@@ -40,7 +40,7 @@ extension BottomPanModalPresentable where Self: UIViewController {
     var bottomLayoutOffset: CGFloat {
 
        guard let rootVC = rootViewController
-            else { return 0}
+            else { return 0 }
 
         return rootVC.view.safeAreaInsets.bottom
     }
@@ -100,8 +100,10 @@ extension BottomPanModalPresentable where Self: UIViewController {
             return bottomYPos - height
         case .intrinsicHeight:
             view.layoutIfNeeded()
-            let targetSize = CGSize(width: (presentedVC?.containerView?.bounds ?? UIScreen.main.bounds).width,
-                                    height: UIView.layoutFittingCompressedSize.height)
+            let targetSize = CGSize(
+                width: (presentedVC?.containerView?.bounds ?? UIScreen.main.bounds).width,
+                height: UIView.layoutFittingCompressedSize.height
+            )
             let intrinsicHeight = view.systemLayoutSizeFitting(targetSize).height
             return bottomYPos - (intrinsicHeight + bottomLayoutOffset)
         }

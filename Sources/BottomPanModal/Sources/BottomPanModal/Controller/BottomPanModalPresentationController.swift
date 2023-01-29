@@ -22,6 +22,7 @@ import UIKit
  By conforming to the PanModalPresentable protocol & overriding values
  the presented view can define its layout configuration & presentation.
  */
+// swiftlint:disable file_length
 open class BottomPanModalPresentationController: UIPresentationController {
 
     /**
@@ -416,7 +417,9 @@ private extension BottomPanModalPresentationController {
     func addDragIndicatorView(to view: UIView) {
         view.addSubview(dragIndicatorView)
         dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        dragIndicatorView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: -Constants.indicatorYOffset).isActive = true
+        dragIndicatorView.bottomAnchor.constraint(
+            equalTo: view.topAnchor,
+            constant: -Constants.indicatorYOffset).isActive = true
         dragIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         dragIndicatorView.widthAnchor.constraint(equalToConstant: Constants.dragIndicatorSize.width).isActive = true
         dragIndicatorView.heightAnchor.constraint(equalToConstant: Constants.dragIndicatorSize.height).isActive = true
@@ -521,7 +524,10 @@ private extension BottomPanModalPresentationController {
                 if velocity.y < 0 {
                     transition(to: .longForm)
 
-                } else if (nearest(to: presentedView.frame.minY, inValues: [longFormYPosition, containerView.bounds.height]) == longFormYPosition
+                } else if (nearest(
+                    to: presentedView.frame.minY,
+                    inValues: [longFormYPosition, containerView.bounds.height]
+                ) == longFormYPosition
                     && presentedView.frame.minY < shortFormYPosition) || presentable?.allowsDragToDismiss == false {
                     transition(to: .shortForm)
 
@@ -535,7 +541,10 @@ private extension BottomPanModalPresentationController {
                  The `containerView.bounds.height` is used to determine
                  how close the presented view is to the bottom of the screen
                  */
-                let position = nearest(to: presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
+                let position = nearest(
+                    to: presentedView.frame.minY,
+                    inValues: [containerView.bounds.height,
+                               shortFormYPosition, longFormYPosition])
 
                 if position == longFormYPosition {
                     transition(to: .longForm)
@@ -643,12 +652,16 @@ private extension BottomPanModalPresentationController {
     }
 
     func snap(toYPosition yPos: CGFloat) {
-        BottomPanModalAnimator.animate({ [weak self] in
-            self?.adjust(toYPosition: yPos)
-            self?.isPresentedViewAnimating = true
-        }, config: presentable) { [weak self] didComplete in
-            self?.isPresentedViewAnimating = !didComplete
-        }
+        BottomPanModalAnimator.animate(
+            animations: { [weak self] in
+                self?.adjust(toYPosition: yPos)
+                self?.isPresentedViewAnimating = true
+            },
+            config: presentable,
+            completion: { [weak self] didComplete in
+                self?.isPresentedViewAnimating = !didComplete
+            }
+        )
     }
 
     /**
@@ -822,7 +835,10 @@ extension BottomPanModalPresentationController: UIGestureRecognizerDelegate {
     /**
      Do not require any other gesture recognizers to fail
      */
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
         return false
     }
 
@@ -892,3 +908,4 @@ private extension UIScrollView {
         return isDragging && !isDecelerating || isTracking
     }
 }
+// swiftlint:enable file_length

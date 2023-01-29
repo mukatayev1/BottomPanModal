@@ -43,20 +43,9 @@ extension UIViewController: BottomPanModalPresenter {
                                 sourceRect: CGRect = .zero,
                                 completion: (() -> Void)? = nil) {
 
-        /**
-         Here, we deliberately do not check for size classes. More info in `PanModalPresentationDelegate`
-         */
-
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            viewControllerToPresent.modalPresentationStyle = .popover
-            viewControllerToPresent.popoverPresentationController?.sourceRect = sourceRect
-            viewControllerToPresent.popoverPresentationController?.sourceView = sourceView ?? view
-            viewControllerToPresent.popoverPresentationController?.delegate = BottomPanModalPresentationDelegate.default
-        } else {
             viewControllerToPresent.modalPresentationStyle = .custom
             viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
             viewControllerToPresent.transitioningDelegate = BottomPanModalPresentationDelegate.default
-        }
 
         present(viewControllerToPresent, animated: true, completion: completion)
     }

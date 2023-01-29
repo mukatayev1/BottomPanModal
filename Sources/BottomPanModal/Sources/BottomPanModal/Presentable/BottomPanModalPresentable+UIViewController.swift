@@ -40,10 +40,12 @@ public extension BottomPanModalPresentable where Self: UIViewController {
     }
 
     /**
-     Operations on the scroll view, such as content height changes, or when inserting/deleting rows can cause the pan modal to jump,
+     Operations on the scroll view, such as content height changes,
+     or when inserting/deleting rows can cause the pan modal to jump,
      caused by the pan modal responding to content offset changes.
 
-     To avoid this, you can call this method to perform scroll view updates, with scroll observation temporarily disabled.
+     To avoid this, you can call this method to perform scroll view updates,
+     with scroll observation temporarily disabled.
      */
     func panModalPerformUpdates(_ updates: () -> Void) {
         presentedVC?.performUpdates(updates)
@@ -54,8 +56,11 @@ public extension BottomPanModalPresentable where Self: UIViewController {
 
      This can be used for animation consistency on views within the presented view controller.
      */
-    func panModalAnimate(_ animationBlock: @escaping AnimationBlockType, _ completion: AnimationCompletionType? = nil) {
-        BottomPanModalAnimator.animate(animationBlock, config: self, completion)
+    func panModalAnimate(
+        animate animationBlock: @escaping AnimationBlockType,
+        completion: AnimationCompletionType? = nil
+    ) {
+        BottomPanModalAnimator.animate(animations: animationBlock, config: self, completion: completion)
     }
 
 }

@@ -13,9 +13,9 @@ struct BottomPanModalAnimator {
     }
 
     static func animate(
-        _ animations: @escaping BottomPanModalPresentable.AnimationBlockType,
+        animations: @escaping BottomPanModalPresentable.AnimationBlockType,
         config: BottomPanModalPresentable?,
-        _ completion: BottomPanModalPresentable.AnimationCompletionType? = nil
+        completion: BottomPanModalPresentable.AnimationCompletionType? = nil
     ) {
 
         let transitionDuration = config?.transitionDuration ?? Constants.defaultTransitionDuration

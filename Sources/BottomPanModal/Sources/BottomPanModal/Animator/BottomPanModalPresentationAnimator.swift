@@ -88,11 +88,11 @@ public class BottomPanModalPresentationAnimator: NSObject {
         }
 
         BottomPanModalAnimator.animate(
-            {
+            animations: {
                 panView.frame.origin.y = yPos
             },
             config: presentable,
-            { [weak self] didComplete in
+            completion: { [weak self] didComplete in
                 // Calls viewDidAppear and viewDidDisappear
                 fromVC.endAppearanceTransition()
                 transitionContext.completeTransition(didComplete)
@@ -118,11 +118,11 @@ public class BottomPanModalPresentationAnimator: NSObject {
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
 
         BottomPanModalAnimator.animate(
-            {
+            animations: {
                 panView.frame.origin.y = transitionContext.containerView.frame.height
             },
             config: presentable,
-            { didComplete in
+            completion: { didComplete in
                 fromVC.view.removeFromSuperview()
                 // Calls viewDidAppear and viewDidDisappear
                 toVC.endAppearanceTransition()
